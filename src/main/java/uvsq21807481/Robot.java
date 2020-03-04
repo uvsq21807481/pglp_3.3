@@ -1,27 +1,32 @@
 package uvsq21807481;
 
-public abstract class Robot {
+public class Robot extends RobotAbstrait{
   private Position position;
   private Direction direction;
+  private static ListRobot listeR = new ListRobot();
 
   public Robot() {
-    this.position = new Position(0, 0);
-    this.direction = Direction.NORD;
+    super();
+    listeR.getArray().add(this);
+    listeR.incNbRobot();
   }
 
   public Robot(Position p) {
-    this.position = p;
-    this.direction = Direction.NORD;
+    super(p);
+    listeR.getArray().add(this);
+    listeR.incNbRobot();
   }
 
   public Robot(Direction d) {
-    this.position = new Position(0, 0);
-    this.direction = d;
+    super(d);
+    listeR.getArray().add(this);
+    listeR.incNbRobot();
   }
 
-  public Robot(Position p, Direction d){
-    this.position = p;
-    this.direction = d;
+  public Robot(Position p, Direction d) {
+    super(p, d);
+    listeR.getArray().add(this);
+    listeR.incNbRobot();
   }
 
   public void tourne() {
@@ -42,5 +47,38 @@ public abstract class Robot {
         break;
     }
   }
-  public abstract void avance();
+
+  @Override
+  public void avance() {
+    switch(direction){
+      case NORD:
+        position.posY++;
+        break;
+      case EST:
+        position.posX++;
+        break;
+      case SUD:
+        position.posY--;
+        break;
+      case OUEST:
+        position.posX--;
+        break;
+      default:
+        break;
+    }
+  }
+
+  public void avancerTous(){
+    for(int i = 0; i < listeR.getNbRobots(); i++){
+      listeR.getArray().get(i).avance();
+    }
+  }
+
+  public Position getPosition() {
+    return this.position;
+  }
+
+  public Direction getDirection() {
+    return this.direction;
+  }
 }

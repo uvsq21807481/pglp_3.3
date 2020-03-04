@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 
 public class TestRobotStatique {
 
-   @Test
+  @Test
   public void testConst(){
      RobotStatique rs = new RobotStatique(0, 0);
      assertEquals(rs.getPosition(), new Position(0 , 0 ));
