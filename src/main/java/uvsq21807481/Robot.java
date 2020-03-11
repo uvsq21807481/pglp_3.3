@@ -1,32 +1,35 @@
 package uvsq21807481;
 
-public class Robot extends RobotAbstrait{
+import java.util.ArrayList;
+
+public class Robot {
+
   private Position position;
   private Direction direction;
-  private static ListRobot listeR = new ListRobot();
+  private static ArrayList<Robot> allrobots = new ArrayList<Robot>();
 
   public Robot() {
-    super();
-    listeR.getArray().add(this);
-    listeR.incNbRobot();
+    this.position = new Position(0, 0);
+    this.direction = Direction.NORD;
+    allrobots.add(this);
   }
 
   public Robot(Position p) {
-    super(p);
-    listeR.getArray().add(this);
-    listeR.incNbRobot();
+    this.position = p;
+    this.direction = Direction.NORD;
+    allrobots.add(this);
   }
 
   public Robot(Direction d) {
-    super(d);
-    listeR.getArray().add(this);
-    listeR.incNbRobot();
+    this.position = new Position(0, 0);
+    this.direction = d;
+    allrobots.add(this);
   }
 
   public Robot(Position p, Direction d) {
-    super(p, d);
-    listeR.getArray().add(this);
-    listeR.incNbRobot();
+    this.position = p;
+    this.direction = d;
+    allrobots.add(this);
   }
 
   public void tourne() {
@@ -48,7 +51,6 @@ public class Robot extends RobotAbstrait{
     }
   }
 
-  @Override
   public void avance() {
     switch(direction){
       case NORD:
@@ -69,8 +71,8 @@ public class Robot extends RobotAbstrait{
   }
 
   public void avancerTous(){
-    for(int i = 0; i < listeR.getNbRobots(); i++){
-      listeR.getArray().get(i).avance();
+    for(Robot r : allrobots){
+      r.avance();
     }
   }
 
